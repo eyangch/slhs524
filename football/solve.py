@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Football
 
 N = int(input())

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # LLLLLLL again
 
 N = int(input())
