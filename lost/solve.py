@@ -8,4 +8,7 @@ def gcd(a, b):
 T, N = map(int, input().split())
 for _ in range(T):
 	A, B = map(int, input().split())
-	print(min(A + B, A * B // gcd(A, B)))
+	if A == B:
+	    print(0)
+	else:
+	    print(min(A + B, A * B // gcd(A, B)))

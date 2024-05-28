@@ -1,7 +1,7 @@
 import random
 
-T = random.randint(50, 100)
-N = random.randint(50, 100)
+T = random.randint(100, 1000)
+N = random.randint(500, 1000)
 
 print(f"{T} {N}")
 for i in range(T):
