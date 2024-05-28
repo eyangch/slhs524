@@ -5,7 +5,7 @@ N, K = map(int, input().split())
 A = [*map(int, input().split())]
 
 dp = [ [-float('inf') for _ in range(K+1)] for _ in range(N+1)]
-dp2 = [ [-float('inf') for _ in range(K+1)] for _ in range(N+1)]
+dp2 = [ [float('inf') for _ in range(K+1)] for _ in range(N+1)]
 # dp2 is because we have to keep track of really negative products
 # since like -100 times -100 is 10,000 which is rly positive yippee
 

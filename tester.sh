@@ -11,8 +11,8 @@ num=$4
 for((i = 1; i <= $num; i++)); do
 	echo "Testing #$i"
 	python3 "$gen" > input_file
-	"$p1" < input_file > output_1
-	"$p2" < input_file > output_2
+	eval "$p1 < input_file > output_1"
+	eval "$p2 < input_file > output_2"
 	if [ "$(diff output_1 output_2)" != "" ]; then
 		echo "You WA uh oh"
 		diff output_1 output_2
