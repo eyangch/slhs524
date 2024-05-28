@@ -1,6 +1,6 @@
 import random
 
-N = random.randint(100, 200)
+N = random.randint(900, 1000)
 
 K = random.randint(5, N)
 

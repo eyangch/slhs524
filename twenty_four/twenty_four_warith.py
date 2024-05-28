@@ -34,9 +34,13 @@ for _ in range(N):
             # ( ( a @ b ) @ c ) @ d
             # ( a @ ( b @ c ) ) @ d
             # ( a @ b ) @ ( c @ d )
+            # a @ (b @ (c @ d))
+            # a @ ((b @ c) @ d)
             alpha = "((" + p[0] + ww[0] + p[1] + ")" + ww[1] + p[2] + ")" + ww[2] + p[3]
             beta = "(" + p[0] + ww[0] + "(" + p[1] + ww[1] + p[2] + "))" + ww[2] + p[3]
             gamma = "(" + p[0] + ww[0] + p[1] + ")" + ww[1] + "(" + p[2] + ww[2] + p[3] + ")"
+            urmom1 = p[0] + ww[0] + "(" + p[1] + ww[1] + "(" + p[2] + ww[2] + p[3] + ")" + ")"
+            urmom2 = p[0] + ww[0] + "((" + p[1] + ww[1] + p[2] + ")" + ww[2] + p[3] + ")"
             try:
                 works |= eval(alpha) == K
                 # print(alpha, eval(alpha))
@@ -49,6 +53,16 @@ for _ in range(N):
                 pass
             try:
                 works |= eval(gamma) == K
+                # print(gamma, eval(gamma))
+            except:
+                pass
+            try:
+                works |= eval(urmom1) == K
+                # print(gamma, eval(gamma))
+            except:
+                pass
+            try:
+                works |= eval(urmom2) == K
                 # print(gamma, eval(gamma))
             except:
                 pass

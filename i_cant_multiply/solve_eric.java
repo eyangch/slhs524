@@ -27,7 +27,7 @@ public class solve_eric{
 		for(int i = 0; i < K; i++){
 			ans = ans.multiply(BigInteger.valueOf(A[i]));
 		}
-		for(int i = 0; i < K; i++){
+		for(int i = 0; i <= K; i++){
 			int cN = i;
 			int cP = K-i;
 			if(cP > nP || cN > nN) continue;
