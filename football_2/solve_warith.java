@@ -33,15 +33,17 @@ public class solve_warith {
             } else if (b == 0) {
                 String s = (a < 0 ? -1 : 1) + " 0";
                 slopes.put(s, slopes.getOrDefault(s, 0) + 1);
+            }else{
+                //boolean neg = (a < 0) ^ (b < 0);
+                //a = Math.abs(a);
+                //b = Math.abs(b);
+                long g = gcd(Math.abs(a), Math.abs(b));
+                a /= g;
+                b /= g;
+                //String s = (neg ? "-" : "") + a + " " + b;
+                String s = a + " " + b;
+                slopes.put(s, slopes.getOrDefault(s, 0) + 1);
             }
-            boolean neg = (a < 0) ^ (b < 0);
-            a = Math.abs(a);
-            b = Math.abs(b);
-            long g = gcd(a, b);
-            a /= g;
-            b /= g;
-            String s = (neg ? "-" : "") + a + " " + b;
-            slopes.put(s, slopes.getOrDefault(s, 0) + 1);
         }
         
         ArrayList<Integer> al = new ArrayList<>();
@@ -49,7 +51,7 @@ public class solve_warith {
             al.add(slopes.get(str));
         }
         Collections.sort(al, Collections.reverseOrder());
-        for (int i = 0; i < K; i++) ans += al.get(i);
+        for (int i = 0; i < Math.min(K, al.size()); i++) ans += al.get(i);
         System.out.println(ans);
     }
     
