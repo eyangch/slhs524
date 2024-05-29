@@ -11,7 +11,7 @@ int N, K, f[1000009];
 
 int bpow(int b, int e){
 	int ans = 1;
-	for(int i = 0; i < 30; i++){
+	for(int i = 0; i < 32; i++){
 		if(e & (1LL<<i)){
 			ans = (ans * b % MOD);
 		}
