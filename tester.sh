@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ $# != 4 ]; then
 	echo Usage: "$0" "<program 1> <program 2> <generator py file> <iterations>"
 	exit
