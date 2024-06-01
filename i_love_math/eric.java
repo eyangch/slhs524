@@ -15,38 +15,13 @@ public class eric{
 	static PrintWriter pw = new PrintWriter(System.out);
 	static StringTokenizer st = new StringTokenizer("");
 	static int MOD = 1000000007;
-	static BigInteger THREE = new BigInteger("3");
-	static int zt[];
-	static void convert3(BigInteger x, int order, int s, int e){
-		if(order == 0){
-			zt[s] = x.intValue();
-			return;
-		}
-		BigInteger sep = THREE.pow(order);
-		BigInteger hi = x.divide(sep);
-		BigInteger lo = x.subtract(hi.multiply(sep));
-		convert3(hi, order/2, s, (s+e)/2);
-		convert3(lo, order/2, (s+e)/2, e);
-	}
 	public static void main(String[] args) throws IOException{
 		String S = br.readLine();
 		BigInteger Z = new BigInteger(S);
-		int l10 = S.length();
-		int l3 = (int)(l10 * 2.095903274289384604296567522021401250607518006)+50;
-		int rl3 = 1;
-		while(rl3 < l3){
-			rl3 <<= 1;
-		}
-		zt = new int[2*rl3];
-		convert3(Z, rl3, 0, 2*rl3);
-		int l0 = 0;
-		for(int i = 0; i < zt.length; i++){
-			if(zt[i] != 0) break;
-			l0++;
-		}
-		int[] z = new int[zt.length-l0];
+		String Z3 = Z.toString(3);
+		int[] z = new int[Z3.length()];
 		for(int i = 0; i < z.length; i++){
-			z[i] = zt[i+l0];
+			z[i] = Z3.charAt(i)-'0';
 		}
 		int N = z.length;
 		long dp[][][] = new long[N][3][2]; // digit#, number, isprefix
