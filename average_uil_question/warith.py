@@ -191,7 +191,7 @@ for _ in range(int(input())):
     # print(f"19: {score}")
 
     # 20
-    div3 = N % int(1e9 + 7) // 3 # no. of numbers less than N divisible by 3
+    div3 = N // 3 % int(1e9 + 7) # no. of numbers <= N divisible by 3 (modded by 1e9+7)
 
     def with3(S):
         L = len(S)
