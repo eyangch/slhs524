@@ -22,7 +22,7 @@ int main() {
     auto solve = [&](V<array<int, 2>>& a) {
         V<int> p(n+1);
         for (array<int, 2> i : a) {
-            p[i[0]]++; p[i[1]+1]--;
+            p[i[0]]++; p[i[1]]--;
         }
         for (int i = 1; i <= n; i++) p[i] += p[i-1];
         return (*max_element(begin(p), end(p)) + k - 1) / k;
