@@ -1,10 +1,12 @@
 from random import randint as r
 
-N = 1000
-K = 1000
+tot = 1000
+
+N = 100000
+K = 1000000000
 
 print(f"{N} {K}")
 
-a = [r(0,1) for _ in range(N)]
+a = [i%2 for i in range(N)]
 
 print("".join(map(str,a)))

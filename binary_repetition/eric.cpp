@@ -7,7 +7,7 @@
 using namespace std;
 
 int MOD = 1e9+7, O=150000;
-int N, K, pfx[100000], P[300000];
+int N, K, pfx[100000], P[1000000];
 string S;
 
 int32_t main(){
@@ -30,7 +30,7 @@ int32_t main(){
 	int ans = 0;
 	if(Z == 0){
 		for(int i = -N; i <= N; i++){
-			int cur = P[i+O] * K;
+			int cur = P[i+O] * K % MOD;
 			ans = (ans + (cur * ((cur+MOD-1) % MOD) % MOD * 500000004) % MOD) % MOD;
 		}
 		ans = (ans + P[O] * K % MOD) % MOD;
@@ -40,12 +40,13 @@ int32_t main(){
 			ans = (ans + (cur * ((cur+MOD-1) % MOD) % MOD * 500000004) % MOD) % MOD;
 		}
 		ans = ans * K % MOD;
+		//moo << ans << endl;
 		for(int i = 0; i < Z; i++){
 			int start = i;
 			while(start - Z >= -N) start -= Z;
 			int mul = 0, add = 0;
 			for(int j = 1; true; j++){
-				if(start + j*Z > N) break;
+				if(start + j*Z > N || j >= K) break;
 				mul = (mul + (K-j) * P[O+start+j*Z] % MOD) % MOD;
 				add = (add + P[O+start+j*Z])% MOD;
 			}
@@ -55,11 +56,16 @@ int32_t main(){
 				mul -= (K-1) * P[O+start+(j+1)*Z];
 				mul = (mul % MOD + MOD) % MOD;
 				add -= P[O+start+(j+1)*Z];
+				int nid = O+start+(j+K)*Z;
+				if(nid < 1000000){
+					add += P[nid];
+				}
 				add = (add % MOD + MOD) % MOD;
 				mul = (mul + add) % MOD;
 			}
+			//moo << ans << endl;
 		}
-		for(int i = 0; i > -N; i -= Z){
+		for(int i = 0; i > -N && -i/Z < K; i -= Z){
 			ans = (ans + P[O+i]) % MOD;
 		}
 	}

@@ -1,7 +1,7 @@
 from hilbertcurve.hilbertcurve import HilbertCurve
 from random import randint as r
 
-N = 100000#r(9000, 10000)
+N = 1000#r(9000, 10000)
 P = 10#r(9, 10)
 hc = HilbertCurve(N, 2)
 
