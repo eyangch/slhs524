@@ -64,5 +64,6 @@ int main() {
             skip:;
         }
     }
+    cout << "NOT POSSIBLE\n";
     return 0;
 }
