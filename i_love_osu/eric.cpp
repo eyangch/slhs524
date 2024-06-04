@@ -24,27 +24,8 @@ double n1(double xa, double ya, double ra, double x, double y){
 }
 
 double n2(double xa, double ya, double ra, double xb, double yb, double rb, double x, double y){
-	if(in_circle(xa, ya, ra, x, y) && in_circle(xb, yb, rb, x, y)) return 0;
-	double vx = xb - x, vy = yb - y;
-	double px = -vy, py = vx;
-	double k = 0, m = 0;
-	//cerr << x << ' ' << y << ' ' << vx << ' ' << vy << endl;
-	if(abs(px) > abs(py)){
-		k = (ya - y + py/px * (x - xa)) / (vy - py*vx/px);
-		m = (vx * k - xa + x) / px;
-	}else{
-		k = (xa - x + px/py * (y - ya)) / (vx - px*vy/py);
-		m = (y + vy * k - ya) / py;
-	}
-	double xi = x + k*vx, yi = y + k*vy;
-	if(k >= 0 && k <= 1){
-		double da2 = (xi - xa) * (xi - xa) + (yi - ya) * (yi - ya);
-		if(da2 <= ra * ra){
-			return n1(xb, yb, rb, x, y);
-		}
-	}
+	if(in_circle(xa, ya, ra, x, y)) return n1(xb, yb, rb, x, y);
 	// debug stuff
-	double ptx = xi - xa, pty = yi - ya;
 	double angle_min = 0;
 	double angle_max = 3*PI;
 	double ans = 10000;
@@ -54,7 +35,7 @@ double n2(double xa, double ya, double ra, double xb, double yb, double rb, doub
 		double pprev = 0;
 		double prev_angle = 0;
 		double pprev_angle = 0;
-		int n = 6;
+		int n = 7;
 		for(int j = -2; j <= n+2; j++){
 			double angle = angle_min + j * angle_diff / n;
 			double nx = xa + ra * cos(angle), ny = ya + ra * sin(angle);
@@ -73,38 +54,14 @@ double n2(double xa, double ya, double ra, double xb, double yb, double rb, doub
 		}
 	}
 	return ans;
-	//cerr << "Slopes: " << ptx / pty << ' ' << px / py << endl;
-	//cerr << k << ' ' << m << endl;
-	// end
-	/*if(m < 0){
-		px = -px, py = -py;
-	}
-	double magp = sqrt(px * px + py * py);
-	double scale = ra / magp;
-	double xp = xa + scale*px, yp = ya + scale*py;
-	double b_angle = atan2(py, px);
-	double width = PI/3;
-	//cerr << xp << ' ' << yp << endl;
-	int n = 288;
-	double ans = 10000;
-	for(int i = 0; i < n; i++){
-		double angle = b_angle - width/2 + i * width / n;
-		double nx = xa + ra * cos(angle), ny = ya + ra * sin(angle);
-		//cerr << angle * 180 / PI << endl;
-		double cur = sqrt((nx - x) * (nx - x) + (ny - y) * (ny - y)) + n1(xb, yb, rb, nx, ny);
-		//cerr << angle * 180 / PI << ' ' << cur << ' ' << cur - sqrt(nx * nx + ny * ny) << endl;
-		//cerr << endl << endl;
-		ans = min(ans, cur);
-	}
-	return ans;*/
-	/*double d1 = sqrt((xp - x) * (xp - x) + (yp - y) * (yp - y));
-	double d2 = n1(xb, yb, rb, xp, yp);
-	return d1 + d2;*/
 }
 
 double n3(double xa, double ya, double ra, double xb, double yb, double rb, double xc, double yc, double rc, double x, double y){
+	if(in_circle(xa, ya, ra, x, y)){
+		return n2(xb, yb, rb, xc, yc, rc, x, y);
+	}
 	double ans = 10000;
-	int n = 8888;
+	int n = 9888;
 	for(int i = 0; i < n; i++){
 		double angle = i * 2 * PI / n;
 		double nx = xa + ra * cos(angle), ny = ya + ra * sin(angle);
@@ -126,7 +83,7 @@ int32_t main(){
 	for(int i = 0; i < N; i++){
 		eat >> X[i] >> Y[i] >> R[i];
 	}
-	moo << setprecision(15);
+	moo << fixed << setprecision(3);
 	if(N == 1){
 		moo << n1(X[0], Y[0], R[0], 0, 0) << endl;
 	}else if(N == 2){
